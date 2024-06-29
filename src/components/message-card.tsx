@@ -10,9 +10,9 @@ import { cn } from "@/utils/cn";
 export type MessageCardProps = React.HTMLAttributes<HTMLDivElement> & {
   avatar?: string;
   showFeedback?: boolean;
-  message?: React.ReactNode;
+  message?: React.ReactNode | any;
   currentAttempt?: number;
-  status?: "success" | "failed";
+  status?: "success" | "failed" | any;
   attempts?: number;
   messageClassName?: string;
   onAttemptChange?: (attempt: number) => void;
@@ -68,21 +68,26 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
     const handleCopy = React.useCallback(() => {
       let stringValue = "";
 
-      if (typeof message === "string") {
-        stringValue = message;
-      } else if (Array.isArray(message)) {
-        message.forEach((child) => {
-          // @ts-ignore
-          const childString =
-            typeof child === "string"
-              ? child
-              : child?.props?.children?.toString();
-
-          if (childString) {
-            stringValue += childString + "\n";
-          }
-        });
+      if (message.type === "text") {
+        stringValue = message.content;
+      } else {
       }
+
+      // if (typeof message === "string") {
+      //   stringValue = message;
+      // } else if (Array.isArray(message)) {
+      //   message.forEach((child) => {
+      //     // @ts-ignore
+      //     const childString =
+      //       typeof child === "string"
+      //         ? child
+      //         : child?.props?.children?.toString();
+
+      //     if (childString) {
+      //       stringValue += childString + "\n";
+      //     }
+      //   });
+      // }
 
       const valueToCopy = stringValue || messageRef.current?.textContent || "";
 
@@ -136,8 +141,11 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
               messageClassName
             )}
           >
-            <div ref={messageRef} className={"pr-20 text-small"}>
-              {hasFailed ? failedMessage : message}
+            <div
+              ref={messageRef}
+              className={"pr-20 text-small break-words whitespace-pre-wrap"}
+            >
+              {hasFailed ? failedMessage : message.content}
             </div>
             {showFeedback && !hasFailed && (
               <div className="absolute right-2 top-2 flex rounded-full bg-content2 shadow-small">
@@ -160,7 +168,7 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
                     />
                   )}
                 </Button>
-                <Button
+                {/* <Button
                   isIconOnly
                   radius="full"
                   size="sm"
@@ -178,8 +186,8 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
                       icon="gravity-ui:thumbs-up"
                     />
                   )}
-                </Button>
-                <Button
+                </Button> */}
+                {/* <Button
                   isIconOnly
                   radius="full"
                   size="sm"
@@ -197,10 +205,10 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
                       icon="gravity-ui:thumbs-down"
                     />
                   )}
-                </Button>
+                </Button> */}
               </div>
             )}
-            {attempts > 1 && !hasFailed && (
+            {/* {attempts > 1 && !hasFailed && (
               <div className="flex w-full items-center justify-end">
                 <button
                   onClick={() =>
@@ -230,9 +238,10 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
                   {currentAttempt}/{attempts}
                 </p>
               </div>
-            )}
+            )} */}
           </div>
-          {showFeedback && attempts > 1 && (
+          {/* ads */}
+          {/* {showFeedback && attempts > 1 && (
             <div className="flex items-center justify-between rounded-medium border-small border-default-100 px-4 py-3 shadow-small">
               <p className="text-small text-default-600">
                 Was this response better or worse?
@@ -303,7 +312,7 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
                 </Tooltip>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     );
