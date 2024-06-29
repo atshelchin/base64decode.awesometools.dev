@@ -1,25 +1,44 @@
 ---
-import {Button} from '@nextui-org/react';
+import { Button } from "@nextui-org/react";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		
-		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="manifest" href="/site.webmanifest">
-		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="theme-color" content="#ffffff">
+  <head>
+    <meta charset="utf-8" />
 
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-		<Button color="primary" client:visible>My button</Button>
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
-	</body>
+    <!-- opengraph meta tag -->
+    <meta property="og:url" content="https://base64decode.awesometools.dev/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://base64decode.awesometools.dev/android-chrome-512x512.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:domain"
+      content="https://base64decode.awesometools.dev"
+    />
+    <meta
+      property="twitter:url"
+      content="https://base64decode.awesometools.dev"
+    />
+    <meta name="twitter:creator" content="@atshelchin" />
+    <meta name="twitter:site" content="@atshelchin" />
+    <meta name="twitter:image" content="/android-chrome-512x512.png" />
+    <title>Base64Decode</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <h1>Astro</h1>
+    <Button color="primary" client:visible>My button</Button>
+  </body>
 </html>
