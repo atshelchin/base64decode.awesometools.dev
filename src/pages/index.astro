@@ -1,5 +1,6 @@
 ---
 import { Button } from "@nextui-org/react";
+import App from "@/components/App";
 ---
 
 <html lang="en">
@@ -56,8 +57,11 @@ import { Button } from "@nextui-org/react";
     <!-- Others -->
     <meta name="viewport" content="width=device-width" />
   </head>
-  <body>
-    <h1>Astro</h1>
-    <Button color="primary" client:visible>My button</Button>
+  <body class="">
+    <div class="flex items-center h-screen justify-center p-4">
+      <div class="sm:max-w-4xl h-full w-full">
+        <App client:visible />
+      </div>
+    </div>
   </body>
 </html>
