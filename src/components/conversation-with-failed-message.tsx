@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 import { userMessages, assistantMessages } from "./messages";
 
@@ -18,61 +18,74 @@ export default function Component() {
     message: React.ReactNode;
     status?: "success" | "failed";
   }> = [
-    {
-      role: "user",
-      message: userMessages[0],
-      status: "success",
-    },
-    {
-      role: "assistant",
-      message: assistantMessages[1],
-      status: "success",
-    },
-    {
-      role: "user",
-      message: userMessages[1],
-      status: "success",
-    },
-    {
-      role: "assistant",
-      message: assistantMessages[0],
-      status: "success",
-    },
-    {
-      role: "user",
-      message: userMessages[1],
-      status: "success",
-    },
-    {
-      role: "assistant",
-      message: assistantMessages[0],
-      status: "failed",
-    },
-    {
-      role: "user",
-      message: userMessages[1],
-      status: "success",
-    },
-    {
-      role: "assistant",
-      message: assistantMessages[0],
-      status: "failed",
-    },
-    {
-      role: "user",
-      message: userMessages[1],
-      status: "success",
-    },
-    {
-      role: "assistant",
-      message: assistantMessages[0],
-      status: "failed",
-    },
-  ];
+      {
+        role: "user",
+        message: userMessages[0],
+        status: "success",
+      },
+      {
+        role: "assistant",
+        message: assistantMessages[1],
+        status: "success",
+      },
+      {
+        role: "user",
+        message: userMessages[1],
+        status: "success",
+      },
+      {
+        role: "assistant",
+        message: assistantMessages[0],
+        status: "success",
+      },
+      {
+        role: "user",
+        message: userMessages[1],
+        status: "success",
+      },
+      {
+        role: "assistant",
+        message: assistantMessages[0],
+        status: "failed",
+      },
+      {
+        role: "user",
+        message: userMessages[1],
+        status: "success",
+      },
+      {
+        role: "assistant",
+        message: assistantMessages[0],
+        status: "failed",
+      },
+      {
+        role: "user",
+        message: userMessages[1],
+        status: "success",
+      },
+      {
+        role: "assistant",
+        message: assistantMessages[0],
+        status: "failed",
+      },
+    ];
 
- 
+  const chatContainerRef = useRef(null);
+
+  // 滚动到底部的函数
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
+  // 在组件初次渲染和每次消息更新后滚动
+  useEffect(() => {
+    scrollToBottom();
+  }, [messagesOfEncode, messagesOfDecode]);
+
   return (
-    <div className="flex flex-col gap-4 px-1">
+    <div className="flex  flex-col gap-4 px-1 overflow-y-auto overflow-x-hidden" ref={chatContainerRef}>
       {mode == "decode" &&
         messagesOfDecode.map(({ role, message, status }, index) => (
           <MessageCard
@@ -85,8 +98,9 @@ export default function Component() {
             }
             currentAttempt={index === 1 ? 2 : 1}
             message={message}
+            position={role == 'user' ? 'right' : 'left'}
             messageClassName={
-              role === "user" ? "bg-content3 text-content3-foreground" : ""
+              role === "user" ? "dark:bg-[#3d6a97] bg-[#95ec69]   text-content3-foreground" : "light:bg-gray-50"
             }
             showFeedback={role === "assistant"}
             status={status}
@@ -105,8 +119,9 @@ export default function Component() {
             }
             currentAttempt={index === 1 ? 2 : 1}
             message={message}
+            position={role == 'user' ? 'right' : 'left'}
             messageClassName={
-              role === "user" ? "bg-content3 text-content3-foreground" : ""
+              role === "user" ? "bg-[#95ec69] dark:bg-[#3d6a97]  text-content3-foreground" : "light:bg-gray-50"
             }
             showFeedback={role === "assistant"}
             status={status}

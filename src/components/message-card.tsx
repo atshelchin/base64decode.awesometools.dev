@@ -14,6 +14,7 @@ export type MessageCardProps = React.HTMLAttributes<HTMLDivElement> & {
   currentAttempt?: number;
   status?: "success" | "failed" | any;
   attempts?: number;
+  position?: string;
   messageClassName?: string;
   onAttemptChange?: (attempt: number) => void;
   onMessageCopy?: (content: string | string[]) => void;
@@ -36,6 +37,7 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
       onAttemptFeedback,
       className,
       messageClassName,
+      position,
       ...props
     },
     ref
@@ -117,7 +119,7 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
     return (
       <div {...props} ref={ref} className={cn("flex gap-3", className)}>
         <div className="relative flex-none">
-          <Badge
+          {/* <Badge
             isOneChar
             color="danger"
             content={
@@ -131,24 +133,24 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
             shape="circle"
           >
             <Avatar src={avatar} />
-          </Badge>
+          </Badge> */}
         </div>
-        <div className="flex w-full flex-col gap-4">
+        <div className={cn("flex w-full flex-col gap-4", position == 'left' ? 'items-start' : 'items-end')}>
           <div
             className={cn(
-              "relative w-full rounded-medium bg-content2 px-4 py-3 text-default-600",
+              "relative w-2full rounded-medium bg-content2  px-4 py-3 text-default-600  max-w-[80%]",
               failedMessageClassName,
               messageClassName
             )}
           >
             <div
               ref={messageRef}
-              className={"pr-20 text-small break-words whitespace-pre-wrap"}
+              className={"pr-10 text-small break-words whitespace-pre-wrap"}
             >
               {hasFailed ? failedMessage : message.content}
             </div>
             {showFeedback && !hasFailed && (
-              <div className="absolute right-2 top-2 flex rounded-full bg-content2 shadow-small">
+              <div className="absolute right-2 top-2 flex rounded-full bg-content2  bshadow-small">
                 <Button
                   isIconOnly
                   radius="full"
