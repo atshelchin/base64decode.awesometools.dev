@@ -7,7 +7,6 @@ import ConversationWithFailedMessage from "./conversation-with-failed-message";
 import PromptInputWithBottomActions from "./prompt-input-with-bottom-actions";
 import { useAtom } from "@xoid/react";
 import { $mode } from "@/stores/mode";
-import { HotKeys } from "react-hotkeys";
 
 
 

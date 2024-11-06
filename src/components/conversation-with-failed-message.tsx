@@ -7,6 +7,13 @@ import MessageCard from "./message-card";
 import { useAtom } from "@xoid/react";
 import { $messagesOfDecode, $messagesOfEncode } from "@/stores/messages";
 import { $mode } from "@/stores/mode";
+ 
+import ScrollToBottom from 'react-scroll-to-bottom';
+
+
+ 
+
+ 
 
 export default function Component() {
   const messagesOfDecode = useAtom($messagesOfDecode);
@@ -72,21 +79,14 @@ export default function Component() {
 
   const chatContainerRef = useRef(null);
 
-  // 滚动到底部的函数
-  const scrollToBottom = () => {
-    if (chatContainerRef.current) {
-      // @ts-ignore
-      chatContainerRef?.current?.scrollTop = chatContainerRef?.current?.scrollHeight;
-    }
-  };
 
-  // 在组件初次渲染和每次消息更新后滚动
-  useEffect(() => {
-    scrollToBottom();
-  }, [messagesOfEncode, messagesOfDecode]);
+
 
   return (
-    <div className="flex  flex-col gap-4 px-1 overflow-y-auto overflow-x-hidden" ref={chatContainerRef}>
+
+    <ScrollToBottom className={"flex  flex-col gap-4 px-1 overflow-y-auto overflow-x-hidden"} >
+
+
       {mode == "decode" &&
         messagesOfDecode.map(({ role, message, status }, index) => (
           <MessageCard
@@ -128,6 +128,7 @@ export default function Component() {
             status={status}
           />
         ))}
-    </div>
+
+    </ScrollToBottom>
   );
 }

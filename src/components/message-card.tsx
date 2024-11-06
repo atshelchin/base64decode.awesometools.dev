@@ -117,7 +117,7 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
     );
 
     return (
-      <div {...props} ref={ref} className={cn("flex gap-3", className)}>
+      <div {...props} ref={ref} className={cn("flex gap-3 my-4", className)}>
         <div className="relative flex-none">
           {/* <Badge
             isOneChar
@@ -135,7 +135,7 @@ const MessageCard = React.forwardRef<HTMLDivElement, MessageCardProps>(
             <Avatar src={avatar} />
           </Badge> */}
         </div>
-        <div className={cn("flex w-full flex-col gap-4", position == 'left' ? 'items-start' : 'items-end')}>
+        <div className={cn("flex w-full pr-4 flex-col gap-4", position == 'left' ? 'items-start' : 'items-end')}>
           <div
             className={cn(
               "relative w-2full rounded-medium bg-content2  px-4 py-3 text-default-600  max-w-[80%]",
