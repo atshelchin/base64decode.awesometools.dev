@@ -75,7 +75,8 @@ export default function Component() {
   // 滚动到底部的函数
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      // @ts-ignore
+      chatContainerRef?.current?.scrollTop = chatContainerRef?.current?.scrollHeight;
     }
   };
 
